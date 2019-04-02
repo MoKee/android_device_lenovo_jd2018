@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-$(call inherit-product, device/xiaomi/violet/device.mk)
+$(call inherit-product, device/lenovo/jd2019/device.mk)
 
 # Inherit some common Mokee stuff.
 $(call inherit-product, vendor/mk/config/common_full_phone.mk)
