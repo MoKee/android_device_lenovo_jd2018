@@ -120,6 +120,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
+# Sensors
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/sensors/proto/mot_camgest.proto:system/etc/sensors/proto/mot_camgest.proto \
+    $(LOCAL_PATH)/sensors/proto/mot_chopchop.proto:system/etc/sensors/proto/mot_chopchop.proto \
+    $(LOCAL_PATH)/sensors/proto/sns_zuk_patpat.proto:system/etc/sensors/proto/sns_zuk_patpat.proto \
+    $(LOCAL_PATH)/sensors/proto/sns_zuk_pickup.proto:system/etc/sensors/proto/sns_zuk_pickup.proto
+    
 # Telephony
 PRODUCT_PACKAGES += \
     telephony-ext
