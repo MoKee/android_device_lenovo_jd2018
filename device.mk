@@ -10,7 +10,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/violet/violet-vendor.mk)
+$(call inherit-product-if-exists, vendor/lenovo/jd2019/jd2019-vendor.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2340
@@ -83,8 +83,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/uinput-goodix.kl:system/usr/keylayout/uinput-goodix.kl
 
 # Lights
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.xiaomi_sm6150
+#PRODUCT_PACKAGES += \
+#    android.hardware.light@2.0-service.xiaomi_sm6150
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
@@ -112,7 +112,7 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_xiaomi
+    librecovery_updater_lenovo
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
