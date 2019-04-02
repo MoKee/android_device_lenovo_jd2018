@@ -80,8 +80,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/slip-cover.kl:system/usr/keylayout/slip-cover.kl
 
 # Lights
-#PRODUCT_PACKAGES += \
-#    android.hardware.light@2.0-service.xiaomi_sm6150
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service.lenovo
 
 # MoKeeActions
 PRODUCT_PACKAGES += \
