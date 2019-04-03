@@ -45,6 +45,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.qcom.rc
 
+# Device-specific settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
 
 # Display
 PRODUCT_PACKAGES += \
@@ -82,10 +85,6 @@ PRODUCT_COPY_FILES += \
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.lenovo
-
-# MoKeeActions
-PRODUCT_PACKAGES += \
-    MoKeeActions
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
