@@ -94,7 +94,7 @@ DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Power
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
+TARGET_TAP_TO_WAKE_NODE := "/sys/class/touch/tp_dev/gesture_on"
 
 # Partitions
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
