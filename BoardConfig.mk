@@ -77,6 +77,9 @@ ifeq ($(TARGET_PREBUILT_KERNEL),)
   #TARGET_KERNEL_SOURCE := kernel/lenovo/jd2018
   #TARGET_KERNEL_CONFIG := whyred-perf_defconfig
 endif
+BOARD_PREBUILT_RECOVERY_RAMDISK := $(DEVICE_PATH)/ramdisk-recovery.img
+
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 
 # Platform
 TARGET_BOARD_PLATFORM := sdm660
