@@ -27,7 +27,7 @@ static constexpr int RAMP_SIZE = 8;
 static constexpr int RAMP_STEP_DURATION = 50;
 
 static constexpr int BRIGHTNESS_RAMP[RAMP_SIZE] = {0, 12, 25, 37, 50, 72, 85, 100};
-static constexpr int DEFAULT_MAX_BRIGHTNESS = 4095;
+static constexpr int DEFAULT_MAX_BRIGHTNESS = 255;
 
 static uint32_t rgbToBrightness(const LightState& state) {
     uint32_t color = state.color & 0x00ffffff;

@@ -6,7 +6,7 @@
 
 BOARD_VENDOR := lenovo
 
-DEVICE_PATH := device/lenovo/jd2019
+DEVICE_PATH := device/lenovo/jd2018
 
 # Architecture
 TARGET_ARCH := arm64
@@ -24,10 +24,25 @@ TARGET_2ND_CPU_VARIANT := cortex-a9
 TARGET_USES_64_BIT_BINDER := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := jd2019
+TARGET_OTA_ASSERT_DEVICE := jd2018
+
+# A/B
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS := \
+  boot \
+  system \
+  vendor
+
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+TARGET_NO_RECOVERY := true
+BOARD_USES_RECOVERY_AS_BOOT := true
+PRODUCT_PACKAGES += \
+  update_engine \
+  update_verifier \
+  bootctl
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := sdm710
+TARGET_BOOTLOADER_BOARD_NAME := sdm660
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
@@ -44,12 +59,12 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/zImage
 ifeq ($(TARGET_PREBUILT_KERNEL),)
   TARGET_KERNEL_CLANG_COMPILE := true
   TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-  TARGET_KERNEL_SOURCE := kernel/lenovo/sdm710
-  TARGET_KERNEL_CONFIG := vendor/jd2019-perf_defconfig
+  TARGET_KERNEL_SOURCE := kernel/lenovo/sdm660
+  TARGET_KERNEL_CONFIG := vendor/jd2018-perf_defconfig
 endif
 
 # Platform
-#TARGET_BOARD_PLATFORM := sdm710
+#TARGET_BOARD_PLATFORM := sdm660
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno616
 
 # Audio
@@ -97,11 +112,10 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 TARGET_TAP_TO_WAKE_NODE := "/sys/class/touch/tp_dev/gesture_on"
 
 # Partitions
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
+#BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
+#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 57453555712
 
@@ -149,4 +163,4 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Inherit from the proprietary version
--include vendor/lenovo/jd2019/BoardConfigVendor.mk
+-include vendor/lenovo/jd2018/BoardConfigVendor.mk
