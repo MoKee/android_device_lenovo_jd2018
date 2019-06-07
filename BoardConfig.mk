@@ -30,8 +30,7 @@ TARGET_OTA_ASSERT_DEVICE := jd2018
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := \
   boot \
-  system \
-  vendor
+  system
 
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_NO_RECOVERY := true
