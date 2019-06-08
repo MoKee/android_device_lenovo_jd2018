@@ -26,19 +26,9 @@ TARGET_USES_64_BIT_BINDER := true
 # Assert
 TARGET_OTA_ASSERT_DEVICE := jd2018
 
-# A/B
-AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS := \
-  boot \
-  system
-
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
-PRODUCT_PACKAGES += \
-  update_engine \
-  update_verifier \
-  bootctl
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sdm660
@@ -114,7 +104,7 @@ DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Power
-TARGET_TAP_TO_WAKE_NODE := "/sys/class/touch/tp_dev/gesture_on"
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev"
 
 # Partitions
 BOARD_SUPPRESS_SECURE_ERASE := true

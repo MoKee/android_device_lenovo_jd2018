@@ -12,6 +12,36 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 # Get non-open-source specific aspects
 $(call inherit-product-if-exists, vendor/lenovo/jd2018/jd2018-vendor.mk)
 
+# A/B
+PRODUCT_PACKAGES += \
+  update_engine \
+  update_verifier
+  
+AB_OTA_POSTINSTALL_CONFIG += \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    RUN_POSTINSTALL_system=true
+    
+AB_OTA_PARTITIONS := \
+  boot \
+  system
+  
+AB_OTA_UPDATER := true
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
+    
+# Boot Control
+PRODUCT_PACKAGES += \
+    bootctrl.qcom   
+    
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+    bootctrl.qcom \
+    libcutils \
+    libgptutils \
+    libz
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2340
 TARGET_SCREEN_WIDTH := 1080
@@ -72,11 +102,11 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0_system
 
 # IFAA manager
-PRODUCT_PACKAGES += \
-    org.ifaa.android.manager
+#PRODUCT_PACKAGES += \
+#    org.ifaa.android.manager
 
-PRODUCT_BOOT_JARS += \
-    org.ifaa.android.manager
+#PRODUCT_BOOT_JARS += \
+#    org.ifaa.android.manager
 
 # IMS
 PRODUCT_PACKAGES += \
@@ -143,6 +173,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     mokee.trust@1.0-service
 
+# Update Engine
+PRODUCT_PACKAGES += \
+    brillo_update_payload \
+    otapreopt_script \
+    update_engine \
+    update_engine_sideload \
+    update_verifier
+
+PRODUCT_PACKAGES_DEBUG += \
+    update_engine_client
+    
 # VNDK-SP
 PRODUCT_PACKAGES += \
     vndk_package
