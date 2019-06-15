@@ -12,15 +12,30 @@ persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
+
+#
 # Set network mode to (T/L/G/W/1X/EVDO, T/G/W/L) for 7+5 mode device on DSDS mode
+#
 ro.telephony.default_network=22,20
 
+debug.sf.enable_hwc_vds=1
+debug.sf.hw=1
+debug.sf.latch_unsignaled=1
+debug.gralloc.enable_fb_ubwc=1
 dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
+persist.demo.hdmirotationlock=false
+#Disable Skip Validate
+sdm.debug.disable_skip_validate=1
+
+#Property to enable display default color mode
+vendor.display.enable_default_color_mode=1
+
+# Display Properties as per treble compliance
+vendor.gralloc.enable_fb_ubwc=1
+vendor.display.disable_skip_validate=1
 
 #ro.hdmi.enable=true
-#persist.speaker.prot.enable=false
-qcom.hw.aac.encoder=true
 #
 # system props for the cne module
 #
@@ -42,28 +57,35 @@ media.settings.xml=/system/etc/media_profiles_vendor.xml
 vendor.mm.enable.qcom_parser=13631487
 persist.mm.enable.prefetch=true
 
+#property to enable narrow search range for video encoding
+vidc.enc.target_support_bframe=1
+vendor.vidc.enc.disable_bframes=1
+vendor.vidc.dec.enable.downscalar=1
+
+# enable PQ feature by default
+vendor.vidc.enc.disable.pq=false
+
+# Additional buffers shared between Camera and Video
+vidc.enc.dcvs.extra-buff-count=2
+
 #Netflix custom property
-ro.netflix.bsp_rev=Q670-14477-1
+ro.netflix.bsp_rev=Q660-13149-1
 
 #
 # system props for the data modules
 #
 ro.vendor.use_data_netmgrd=true
-persist.data.netmgrd.qos.enable=true
 persist.vendor.data.mode=concurrent
-
 #system props for time-services
 persist.timed.enable=true
-
-#system prop for Bluetooth SOC type
-vendor.bluetooth.soc=cherokee
-#ro.bluetooth.library_name=libbluetooth_qti.so
-persist.vendor.btstack.enable.splita2dp=true
-persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac
 
 # system property for maximum number of HFP client connections
 bt.max.hfpclient.connections=1
 
+# System property for cabl
+# ro.qualcomm.cabl=2
+ro.qualcomm.cabl=0
+ro.vendor.display.cabl=2
 
 #
 # System props for telephony
@@ -81,13 +103,9 @@ ro.bluetooth.wipower=true
 #
 #snapdragon value add features
 #
-ro.qc.sdk.audio.ssr=false
 
-##fluencetype can be "fluence" or "fluencepro" or "none"
-ro.qc.sdk.audio.fluencetype=none
-persist.audio.fluence.voicecall=true
-persist.audio.fluence.voicerec=false
-persist.audio.fluence.speaker=true
+#minimum duration for offload playback in secs
+audio.offload.min.duration.secs=30
 
 #enable offload audio video playback by default
 audio.offload.video=true
@@ -99,47 +117,31 @@ audio.deep_buffer.media=true
 ro.af.client_heap_size_kbyte=7168
 
 #system prop for RmNet Data
-persist.rmnet.data.enable=true
-persist.data.wda.enable=true
-persist.data.df.dl_mode=5
-persist.data.df.ul_mode=5
-persist.data.df.agg.dl_pkt=10
-persist.data.df.agg.dl_size=4096
-persist.data.df.mux_count=8
-persist.data.df.iwlan_mux=9
 persist.data.df.dev_name=rmnet_usb0
+
+#
+# system property determining camera HAL to be used for a Video call
+#
+# 1 is camera1
+# 2 or anything else is camera2
+persist.radio.VT_CAM_INTERFACE=2
 
 #property to enable user to access Google WFD settings
 persist.debug.wfd.enable=1
+#Enable stm-events
+persist.debug.coresight.config=stm-events
 ##property to choose between virtual/external wfd display
 persist.sys.wfd.virtual=0
-
-#property to enable HWC for VDS
-debug.sf.enable_hwc_vds=1
-
-# enable tunnel encoding for amrwb
-tunnel.audio.encode = true
-
-#Buffer size in kbytes for compress offload playback
-audio.offload.buffer.size.kb=32
-
-#Enable offload audio video playback by default
-av.offload.enable=true
-
-#enable voice path for PCM VoIP by default
-use.voice.path.for.pcm.voip=true
 
 # system prop for NFC DT
 ro.nfc.port=I2C
 
-#enable dsp gapless mode by default
-audio.offload.gapless.enabled=true
+#property for vendor specific library
+ro.vendor.at_library=libqti-at.so
 
-#initialize QCA1530 detection
-sys.qca1530=detect
-
-#Enable stm events
-persist.debug.coresight.config=stm-events
+#min/max cpu in core control
+ro.vendor.qti.core_ctl_min_cpu=2
+ro.vendor.qti.core_ctl_max_cpu=4
 
 #hwui properties
 ro.hwui.texture_cache_size=72
@@ -152,23 +154,54 @@ ro.hwui.texture_cache_flushrate=0.4
 ro.hwui.text_small_cache_width=1024
 ro.hwui.text_small_cache_height=1024
 ro.hwui.text_large_cache_width=2048
-ro.hwui.text_large_cache_height=4096
+ro.hwui.text_large_cache_height=2048
 
-config.disable_rtt=true
+#Enable B service adj transition by default
+ro.vendor.qti.sys.fw.bservice_enable=true
+ro.vendor.qti.sys.fw.bservice_limit=5
+ro.vendor.qti.sys.fw.bservice_age=5000
+
+# Enable Delay Service Restart
+ro.vendor.qti.am.reschedule_service=true
 
 #Bringup properties
-persist.sys.force_sw_gles=1
 persist.vendor.radio.atfwd.start=true
-ro.kernel.qemu.gles=0
 
-sdm.drop_skewed_vsync=1
+#property to enable VDS WFD solution
+persist.hwc.enable_vds=1
 
-#core-ctl properties used by perfd
-ro.vendor.qti.core_ctl_min_cpu=4
-ro.vendor.qti.core_ctl_max_cpu=6
+#Increase cached app limit
+ro.vendor.qti.sys.fw.bg_apps_limit=32
+
+#Settings to enable sensors
+#Device Orientation sensor
+ro.vendor.sensors.dev_ori=true
+#Persistent Motion Detector
+ro.vendor.sensors.pmd=true
+#Stationary Detector
+ro.vendor.sensors.sta_detect=true
+#Motion Detector
+ro.vendor.sensors.mot_detect=true
+
+#Expose aux camera for below packages
+vendor.camera.aux.packagelist=org.codeaurora.snapcam
+
+#disable UBWC for camera
+persist.vendor.camera.preview.ubwc=0
 
 #set maximum supported adapter voltage
 persist.chg.max_volt_mv=9000
+
+#system prop for Bluetooth SOC type
+vendor.bluetooth.soc=cherokee
+ro.bluetooth.library_name=libbluetooth_qti.so
+persist.vendor.btstack.enable.splita2dp=true
+persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxhd-aac
+
+# Property for backup NTP Server
+persist.backup.ntpServer="0.pool.ntp.org"
+# enable IZat OptInApp overlay
+persist.vendor.overlay.izat.optin=rro
 
 # ro.location properties below are used in conjunction
 # with NLP_MODE setting in /vendor/etc/izat.conf
@@ -187,10 +220,19 @@ ro.location.osnlp.region.package=
 
 #Factory requirement
 ro.usb.firstboot.config=diag,adb
+#Enable QCRIL snapshot cache
+persist.vendor.radio.snapshot_enabled=1
+persist.vendor.radio.snapshot_timer=22
+ro.usb.firstboot.config=diag,serial_cdev,rmnet,adb
 
-# Huaqin modify for block camera id 2/3/4/5 when testing vts by zhangpeng at 2018/11/15 start
-sys.camera.packagename.zui=1
-# Huaqin modify for block camera id 2/3/4/5 when testing vts by zhangpeng at 2018/11/15 end
+#Enable CQA fingerprint test
+ro.hw.fps=true
+
+#Enable 4K H.264 encoder energy saving mode
+vendor.vidc.debug.perf.mode=2
+
+# disable rcs
+persist.rcs.supported=0
 
 # Maintainer
 ro.mk.maintainer=art_chen

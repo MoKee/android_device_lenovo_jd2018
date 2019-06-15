@@ -33,9 +33,6 @@ PRODUCT_PACKAGES_DEBUG += \
     bootctl
     
 # Boot Control
-PRODUCT_PACKAGES += \
-    bootctrl.qcom   
-    
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.qcom \
     libcutils \
@@ -178,7 +175,6 @@ PRODUCT_PACKAGES += \
     brillo_update_payload \
     otapreopt_script \
     update_engine \
-    update_engine_sideload \
     update_verifier
 
 PRODUCT_PACKAGES_DEBUG += \
