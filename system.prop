@@ -236,3 +236,7 @@ persist.rcs.supported=0
 
 # Maintainer
 ro.mk.maintainer=art_chen
+
+# HAL 3
+persist.camera.HAL3.enabled=1
+persist.camera.eis.enable=1
