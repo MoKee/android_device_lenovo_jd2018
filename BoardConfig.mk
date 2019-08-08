@@ -112,6 +112,13 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger Mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGING_CMDLINE_NAME  := "androidboot.mode"
+BOARD_CHARGING_CMDLINE_VALUE := "usb_chg"
+BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
+BLINK_PATH     := "/sys/class/leds/red/blink"
+RED_LED_PATH   := "/sys/class/leds/red/brightness"
+GREEN_LED_PATH := "/sys/class/leds/green/brightness"
+BLUE_LED_PATH  := "/sys/class/leds/green/brightness"
 
 # CNE and DPM
 BOARD_USES_QCNE := true
