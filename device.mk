@@ -340,10 +340,6 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
     
-# Offline charging
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.enable_boot_charger_mode=1 
-    
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.1-service-qti

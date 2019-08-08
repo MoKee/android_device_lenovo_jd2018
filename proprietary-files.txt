@@ -1966,7 +1966,7 @@ vendor/lib/librs_adreno.so
 vendor/lib/libRSDriver_adreno.so
 
 # IFAA
-vendor/bin/hwvendor.zui.hardware.ifaa@1.0-service
+vendor/bin/hw/vendor.zui.hardware.ifaa@1.0-service
 vendor/bin/ifaa_product
 vendor/etc/init/vendor.zui.hardware.ifaa@1.0-service.rc
 vendor/lib64/libifaaproduct.so
