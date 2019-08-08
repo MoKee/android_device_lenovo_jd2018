@@ -122,6 +122,9 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 PRODUCT_PACKAGES += \
     fs_config_files
+# AliPay
+PRODUCT_BOOT_JARS += \
+    ifaa_fw
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -260,7 +263,8 @@ PRODUCT_PACKAGES += \
 
 # HIDL
 PRODUCT_PACKAGES += \
-    android.hidl.base@1.0
+    android.hidl.base@1.0 \
+    android.hidl.base@1.0_system
 
 # IMS
 PRODUCT_PACKAGES += \

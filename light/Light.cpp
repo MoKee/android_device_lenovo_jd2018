@@ -244,7 +244,10 @@ void Light::setSpeakerLightLocked(const LightState& state) {
         mBlueRampStepMs << stepDuration << std::endl;
 
         // Start the party
-        mRgbBlink << 1 << std::endl;
+        mRedBlink << 1 << std::endl;
+        mGreenBlink << 1 << std::endl;
+        mBlueBlink << 1 << std::endl;
+        
     } else {
         if (red == 0 && green == 0 && blue == 0) {
             mRedBlink << 0 << std::endl;
