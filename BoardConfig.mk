@@ -55,6 +55,12 @@ endif
 # Platform
 TARGET_BOARD_PLATFORM := sdm660
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno509
+# QCOM
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_USE_SDCLANG := true
+
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
