@@ -425,6 +425,8 @@ vendor/lib64/libvideoutils.so
 vendor/lib/libmorpho_dr_checker2.so
 vendor/lib/libmorpho_easy_hdr.so
 vendor/lib/libmorpho_image_stab5.so
+vendor/lib/libft2_vendor.so
+vendor/lib/libpandora.so
 
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so

@@ -495,10 +495,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <name>vendor.mokee.livedisplay</name>
         <version>2.0</version>
         <interface>
-            <name>IDisplayModes</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
             <name>IPictureAdjustment</name>
             <instance>default</instance>
         </interface>
