@@ -198,7 +198,6 @@ vendor/lib/hw/camera.sdm660.so
 vendor/lib/libmmcamera_interface.so
 vendor/lib/libmmjpeg_interface.so
 vendor/lib/libqomx_core.so
-vendor/lib/lib_lowlight.so
 vendor/lib/libarcsoft_beautyshot.so
 vendor/lib/libarcsoft_dualcam_refocus.so
 vendor/lib/libcdsprpc.so
@@ -1745,16 +1744,6 @@ vendor/lib64/vendor.qti.hardware.data.qmi@1.0.so
 vendor/lib64/vendor.qti.data.factory@1.0.so
 vendor/lib64/vendor.qti.latency@2.0.so
 
-# Consumerir
-vendor/lib/hw/consumerir.default.so
-vendor/lib64/hw/consumerir.default.so
-
-# Display calibration
-vendor/etc/qdcm_calib_data_huaxing_nt36672_fhd_video_mode_dsi_panel.xml
-vendor/etc/qdcm_calib_data_shenchao_td4310_fhd_video_mode_dsi_panel.xml
-vendor/etc/qdcm_calib_data_tianma_nt36672_fhd_video_mode_dsi_panel.xml
-vendor/etc/qdcm_calib_data_tianma_td4310_fhd_video_mode_dsi_panel.xml
-
 # DPM
 bin/dpmd
 etc/dpm/dpm.conf
@@ -1877,23 +1866,6 @@ vendor/firmware/mono.cnt
 vendor/firmware/stereo.cnt
 vendor/firmware/tfa98xx.cnt
 
-# Fingerprint sensor
--vendor/app/FingerprintExtensionService/FingerprintExtensionService.apk
-vendor/bin/qfp-daemon
-vendor/etc/permissions/com.fingerprints.extension.xml
-vendor/framework/com.fingerprints.extension.jar
-vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
-vendor/lib64/hw/fingerprint.default.so
-vendor/lib64/hw/fingerprint.fpc.default.so
-vendor/lib64/hw/fingerprint.goodix.default.so
-vendor/lib64/com.fingerprints.extension@1.0.so
-vendor/lib64/libgf_ca.so
-vendor/lib64/libgf_hal.so
-vendor/lib64/libqfp-service.so
-vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0-service.so
-vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0.so
-vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
-
 # FM
 lib/libfm-hci.so
 lib/fm_helium.so
@@ -1996,9 +1968,9 @@ vendor/lib/libRSDriver_adreno.so
 # IFAA
 vendor/bin/hwvendor.zui.hardware.ifaa@1.0-service
 vendor/bin/ifaa_product
-vendor/etc/initvendor.zui.hardware.ifaa@1.0-service.rc
+vendor/etc/init/vendor.zui.hardware.ifaa@1.0-service.rc
 vendor/lib64/libifaaproduct.so
-vendor/lib64vendor.zui.hardware.ifaa@1.0.so
+vendor/lib64/vendor.zui.hardware.ifaa@1.0.so
 
 # Kernel-Modules
 vendor/lib/modules/modules.alias
@@ -2337,9 +2309,7 @@ vendor/lib64/hw/vendor.qti.hardware.soter@1.0-impl.so
 # Thermal
 vendor/etc/thermal-engine.conf
 vendor/bin/thermal-engine
-vendor/lib/libthermalfeature.so
 -vendor/lib/libthermalclient.so
-vendor/lib64/libthermalfeature.so
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
