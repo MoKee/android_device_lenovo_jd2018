@@ -504,9 +504,6 @@
     <!-- Height of the status bar in landscape -->
     <dimen name="status_bar_height_landscape">24dp</dimen>
     <string translatable="false" name="config_mainBuiltInDisplayCutout">M -218,0 L -218,87 L 218,87 L 218,0 Z</string>
-    <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
-                  autodetected from the Configuration. -->
-    <bool name="config_showNavigationBar">true</bool>
 
     <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
