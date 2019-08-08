@@ -53,7 +53,7 @@ const static std::string kBlueRampStepMsPath = "/sys/class/leds/green/ramp_step_
 const static std::string kRedBlinkPath = "/sys/class/leds/red/blink";
 const static std::string kGreenBlinkPath = "/sys/class/leds/green/blink";
 const static std::string kBlueBlinkPath = "/sys/class/leds/green/blink";
-const static std::string kRgbBlinkPath = "/sys/class/leds/rgb/rgb_blink";
+const static std::string kRgbBlinkPath = "/sys/class/leds/red/blink";
 
 int main() {
     uint32_t lcdMaxBrightness = 255;
