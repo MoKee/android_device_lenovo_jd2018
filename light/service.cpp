@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.light@2.0-service.lenovo"
+#define LOG_TAG "android.hardware.light@2.0-service.lenovo_jd2018"
 
 #include <android-base/logging.h>
 #include <hidl/HidlTransportSupport.h>
