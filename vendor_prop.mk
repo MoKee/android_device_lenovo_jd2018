@@ -153,4 +153,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.usb.firstboot.config=diag,serial_cdev,rmnet,adb \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
-    ro.enable_boot_charger_mode=1 
+    ro.enable_boot_charger_mode=1 \
+    persist.dbg.volte_avail_ovr=1 \
+    persist.dbg.vt_avail_ovr=1
