@@ -381,7 +381,7 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.lenovo.common.rc \
     init.lenovo.rc \
-    init.lenovo.usb.configfs.rc
+    init.lenovo.usb.configfs.rc \
     init.qcom.sensors.sh \
     init.qcom.sh \
     init.qcom.usb.rc \
