@@ -30,8 +30,8 @@ using android::hardware::joinRpcThreadpool;
 using android::hardware::light::V2_0::ILight;
 using android::hardware::light::V2_0::implementation::Light;
 
-const static std::string kLcdBacklightPath = "/sys/class/leds/wled/brightness";
-const static std::string kLcdMaxBacklightPath = "/sys/class/leds/wled/max_brightness";
+const static std::string kLcdBacklightPath = "/sys/class/leds/lcd-backlight/brightness";
+const static std::string kLcdMaxBacklightPath = "/sys/class/leds/lcd-backlight/max_brightness";
 const static std::string kRedLedPath = "/sys/class/leds/red/brightness";
 const static std::string kGreenLedPath = "/sys/class/leds/green/brightness";
 const static std::string kBlueLedPath = "/sys/class/leds/green/brightness";

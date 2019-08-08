@@ -33,5 +33,15 @@ write_headers
 
 write_makefiles "$MY_DIR"/proprietary-files.txt true
 
+cat << EOF >> "$BOARDMK"
+ifeq (\$(WITH_TWRP),true)
+TARGET_RECOVERY_DEVICE_DIRS += vendor/$VENDOR/$DEVICE/proprietary
+endif
+EOF
+
+cat << EOF >> "$ANDROIDMK"
+
+EOF
+
 # Finish
 write_footers

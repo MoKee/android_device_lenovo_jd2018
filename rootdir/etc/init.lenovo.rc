@@ -1,0 +1,74 @@
+import /vendor/etc/init/hw/init.lenovo.usb.rc
+import /vendor/etc/init/hw/init.lenovo.common.rc
+
+on fs
+    #goodix
+    chown system system /dev/goodix_fp
+    chmod 666 /dev/goodix_fp
+
+on init
+#added touch gesture wake node permission
+    chown system /sys/devices/virtual/touch/tp_dev/gesture_on
+    chown system /sys/class/leds/wled/hdr_en
+
+# hwdiag test interface on thirdparty Huaqin
+service hwdiag /system/bin/hwdiag
+    class main
+	user root
+	group root
+
+on boot
+	start hwdiag
+
+    # Huaqin add proximity sensors permission by chenhuazhen at 2018/2/29 start
+    chmod 0644 /sys/class/sensors/proximity/sensors_enable
+    chmod 0644 /sys/class/sensors/proximity/sensors_delay
+    chmod 0644 /sys/class/sensors/proximity/sensors_calibrate
+    chmod 0644 /sys/class/sensors/proximity/sensors_enable_wakeup
+    chmod 0644 /sys/class/sensors/proximity/sensors_flush
+    chown system system /sys/class/sensors/proximity/sensors_enable
+    chown system system /sys/class/sensors/proximity/sensors_delay
+    chown system system /sys/class/sensors/proximity/sensors_calibrate
+    chown system system /sys/class/sensors/proximity/sensors_enable_wakeup
+    chown system system /sys/class/sensors/proximity/sensors_flush
+    # Huaqin add proximity sensors permission by chenhuazhen at 2018/2/29 end
+
+    # Huaqin add lights sensors permission by jianghong at 2018/1/31 start
+    chmod 0644 /sys/class/sensors/lights/sensors_enable
+    chmod 0644 /sys/class/sensors/lights/sensors_delay
+    chmod 0644 /sys/class/sensors/lights/sensors_calibrate
+    chmod 0644 /sys/class/sensors/lights/sensors_enable_wakeup
+    chmod 0644 /sys/class/sensors/lights/sensors_flush
+    chown system system /sys/class/sensors/lights/sensors_enable
+    chown system system /sys/class/sensors/lights/sensors_delay
+    chown system system /sys/class/sensors/lights/sensors_calibrate
+    chown system system /sys/class/sensors/lights/sensors_enable_wakeup
+    chown system system /sys/class/sensors/lights/sensors_flush
+    # Huaqin add lights sensors permission by jianghong at 2018/1/31 end
+
+    #Huaqin add for alsps dev_info by chenyijun5 at 2018/03/07 start
+    chown system system /sys/devices/platform/hq_dev_info/name
+    #Huaqin add for alsps dev_info by chenyijun5 at 2018/03/07 end
+
+    # Add for egtzappf begin
+    chown system system /dev/esfp0
+    chmod 0666          /dev/esfp0
+
+    chown system system /sys/devices/platform/egis_input/navigation_event
+    chown system system /sys/devices/platform/egis_input/navigation_enable
+    chmod 0222 /sys/devices/platform/egis_input/navigation_event
+    chmod 0666 /sys/devices/platform/egis_input/navigation_enable
+
+    mkdir /data/system/users/0/fpdata
+    chown system system /data/system/users/0/fpdata
+    chmod 0777 /data/system/users/0/fpdata
+    # Add for egtzappf end 
+
+
+# Huaqin modify for factory_reset in shipping image by zhouyingchen at 20180417 for bsp/rom start
+on property:sys.ab_update.factory_reset=true
+    write_factory_reset
+	setprop sys.diag.reset_factory ${sys.ab_update.factory_reset}
+# Huaqin modify for factory_reset in shipping image by zhouyingchen at 20180417 for bsp/rom end
+
+
