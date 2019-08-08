@@ -1816,8 +1816,8 @@ vendor/lib64/libgoodixfingerprintd_binder.so
 vendor/lib64/libgoodixhwfingerprint.so
 vendor/lib64/libqfp-service.so
 vendor/lib64/libvendor.goodix.hardware.fingerprintextension@1.0.so
-vendor/lib64vendor.qti.hardware.fingerprint@1.0.so
-vendor/libvendor.qti.hardware.fingerprint@1.0.so
+vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
+vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
 
 # Firmware
 vendor/firmware/a530v3_seq.fw2
