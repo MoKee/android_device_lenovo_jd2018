@@ -291,6 +291,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/sdm660-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/sdm660-mtp-snd-card_Button_Jack.kl \
     $(LOCAL_PATH)/keylayout/fts_ts.kl:system/usr/keylayout/fts_ts.kl \
     $(LOCAL_PATH)/keylayout/slip-cover.kl:system/usr/keylayout/slip-cover.kl
+# Keymaster HAL
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # Lights
 PRODUCT_PACKAGES += \
