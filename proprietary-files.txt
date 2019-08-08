@@ -1977,7 +1977,7 @@ vendor/lib/libRSDriver_adreno.so
 
 # IFAA
 framework/vendor.zui.hardware.ifaa-V1.0-java.jar
--framework/ifaa_fw.jar
+-framework/ifaa_fw.jar|ae1b2b4108f046a9160d1df6d93a222a07d005ba
 vendor/bin/hw/vendor.zui.hardware.ifaa@1.0-service
 vendor/bin/ifaa_product
 vendor/etc/init/vendor.zui.hardware.ifaa@1.0-service.rc
