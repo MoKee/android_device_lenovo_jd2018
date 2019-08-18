@@ -65,8 +65,7 @@ Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
              std::ofstream&& red_pause_lo, std::ofstream&& green_pause_lo, std::ofstream&& blue_pause_lo,
              std::ofstream&& red_pause_hi, std::ofstream&& green_pause_hi, std::ofstream&& blue_pause_hi,
              std::ofstream&& red_ramp_step_ms, std::ofstream&& green_ramp_step_ms, std::ofstream&& blue_ramp_step_ms,
-             std::ofstream&& red_blink, std::ofstream&& green_blink, std::ofstream&& blue_blink,
-             std::ofstream&& rgb_blink)
+             std::ofstream&& red_blink, std::ofstream&& green_blink, std::ofstream&& blue_blink)
     : mLcdBacklight(std::move(lcd_backlight)),
       mRedLed(std::move(red_led)),
       mGreenLed(std::move(green_led)),
@@ -88,8 +87,7 @@ Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
       mBlueRampStepMs(std::move(blue_ramp_step_ms)),
       mRedBlink(std::move(red_blink)),
       mGreenBlink(std::move(green_blink)),
-      mBlueBlink(std::move(blue_blink)),
-      mRgbBlink(std::move(rgb_blink)) {
+      mBlueBlink(std::move(blue_blink)) {
     auto attnFn(std::bind(&Light::setAttentionLight, this, std::placeholders::_1));
     auto backlightFn(std::bind(&Light::setLcdBacklight, this, std::placeholders::_1));
     auto batteryFn(std::bind(&Light::setBatteryLight, this, std::placeholders::_1));
@@ -140,7 +138,16 @@ void Light::setLcdBacklight(const LightState& state) {
     // apply linear scaling across the accepted range.
     if (mLcdBacklight.second != DEFAULT_MAX_BRIGHTNESS) {
         int old_brightness = brightness;
-        brightness = brightness * mLcdBacklight.second / DEFAULT_MAX_BRIGHTNESS;
+		if (brightness > 0 && brightness < 5) {
+			if (brightness = 1) {
+				brightness = brightness;
+			} else {
+				brightness = brightness * 2;
+			}
+			LOG(VERBOSE) << "Dark mode brightness " << brightness;
+		} else {
+        	brightness = brightness * mLcdBacklight.second / DEFAULT_MAX_BRIGHTNESS;
+		}
         LOG(VERBOSE) << "scaling brightness " << old_brightness << " => " << brightness;
     }
 
@@ -155,7 +162,35 @@ void Light::setBatteryLight(const LightState& state) {
 
 void Light::setNotificationLight(const LightState& state) {
     std::lock_guard<std::mutex> lock(mLock);
-    mNotificationState = state;
+
+    uint32_t brightness, color, rgb[3];
+    LightState localState = state;
+
+    // If a brightness has been applied by the user
+    brightness = (localState.color & 0xff000000) >> 24;
+    if (brightness > 0 && brightness < 255) {
+        // Retrieve each of the RGB colors
+        color = localState.color & 0x00ffffff;
+        rgb[0] = (color >> 16) & 0xff;
+        rgb[1] = (color >> 8) & 0xff;
+        rgb[2] = color & 0xff;
+
+        // Apply the brightness level
+        if (rgb[0] > 0) {
+            rgb[0] = (rgb[0] * brightness) / 0xff;
+        }
+        if (rgb[1] > 0) {
+            rgb[1] = (rgb[1] * brightness) / 0xff;
+        }
+        if (rgb[2] > 0) {
+            rgb[2] = (rgb[2] * brightness) / 0xff;
+        }
+
+        // Update with the new color
+        localState.color = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
+    }
+
+    mNotificationState = localState;
     setSpeakerBatteryLightLocked();
 }
 
@@ -180,22 +215,7 @@ void Light::setSpeakerBatteryLightLocked() {
 void Light::setSpeakerLightLocked(const LightState& state) {
     int red, green, blue, blink;
     int onMs, offMs, stepDuration, pauseHi;
-    uint32_t alpha;
-
-    // Extract brightness from AARRGGBB
-    alpha = (state.color >> 24) & 0xff;
-
-    // Retrieve each of the RGB colors
-    red = (state.color >> 16) & 0xff;
-    green = (state.color >> 8) & 0xff;
-    blue = state.color & 0xff;
-
-    // Scale RGB colors if a brightness has been applied by the user
-    if (alpha != 0xff) {
-        red = (red * alpha) / 0xff;
-        green = (green * alpha) / 0xff;
-        blue = (blue * alpha) / 0xff;
-    }
+    uint32_t colorRGB = state.color;
 
     switch (state.flashMode) {
         case Flash::TIMED:
@@ -208,10 +228,16 @@ void Light::setSpeakerLightLocked(const LightState& state) {
             offMs = 0;
             break;
     }
+
+    red = (colorRGB >> 16) & 0xff;
+    green = (colorRGB >> 8) & 0xff;
+    blue = colorRGB & 0xff;
     blink = onMs > 0 && offMs > 0;
 
     // Disable all blinking to start
-    mRgbBlink << 0 << std::endl;
+    mRedBlink << 0 << std::endl;
+    mGreenBlink << 0 << std::endl;
+    mBlueBlink << 0 << std::endl;
 
     if (blink) {
         stepDuration = RAMP_STEP_DURATION;
@@ -247,13 +273,7 @@ void Light::setSpeakerLightLocked(const LightState& state) {
         mRedBlink << 1 << std::endl;
         mGreenBlink << 1 << std::endl;
         mBlueBlink << 1 << std::endl;
-        
     } else {
-        if (red == 0 && green == 0 && blue == 0) {
-            mRedBlink << 0 << std::endl;
-            mGreenBlink << 0 << std::endl;
-            mBlueBlink << 0 << std::endl;
-        }
         mRedLed << red << std::endl;
         mGreenLed << green << std::endl;
         mBlueLed << blue << std::endl;
