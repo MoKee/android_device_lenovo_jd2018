@@ -142,7 +142,7 @@ void Light::setLcdBacklight(const LightState& state) {
 			if (brightness == 1) {
 				brightness = brightness * 1;
 			} else {
-				brightness = brightness * 2;
+				brightness = brightness * 8;
 			}
 			LOG(VERBOSE) << "Dark mode brightness " << brightness;
 		} else {
