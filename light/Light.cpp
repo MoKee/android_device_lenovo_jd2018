@@ -138,7 +138,7 @@ void Light::setLcdBacklight(const LightState& state) {
     // apply linear scaling across the accepted range.
     if (mLcdBacklight.second != DEFAULT_MAX_BRIGHTNESS) {
         int old_brightness = brightness;
-		if (brightness > 0 && brightness < 5) {
+		if (brightness > 0 && brightness < 3) {
 			if (brightness == 1) {
 				brightness = brightness * 1;
 			} else {
