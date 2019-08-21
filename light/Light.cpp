@@ -23,10 +23,10 @@
 namespace {
 using android::hardware::light::V2_0::LightState;
 
-static constexpr int RAMP_SIZE = 8;
-static constexpr int RAMP_STEP_DURATION = 50;
+static constexpr int RAMP_SIZE = 15;
+static constexpr int RAMP_STEP_DURATION = 150;
 
-static constexpr int BRIGHTNESS_RAMP[RAMP_SIZE] = {0, 12, 25, 37, 50, 72, 85, 100};
+static constexpr int BRIGHTNESS_RAMP[RAMP_SIZE] = {0, 12, 25, 37, 50, 72, 85, 100, 85, 72, 50, 37, 25, 12, 0};
 static constexpr int DEFAULT_MAX_BRIGHTNESS = 255;
 
 static uint32_t rgbToBrightness(const LightState& state) {
@@ -261,9 +261,9 @@ void Light::setSpeakerLightLocked(const LightState& state) {
         mBlueRampStepMs << stepDuration << std::endl;
 
         // Start the party
-        mRedBlink << 1 << std::endl;
+        //mRedBlink << 1 << std::endl;
         mGreenBlink << 1 << std::endl;
-        mBlueBlink << 1 << std::endl;
+        //mBlueBlink << 1 << std::endl;
     } else {
         mRedLed << red << std::endl;
         mGreenLed << green << std::endl;
