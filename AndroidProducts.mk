@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/mk_jd2018.mk
+    $(LOCAL_DIR)/mokee_jd2018.mk
