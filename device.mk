@@ -123,9 +123,6 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 PRODUCT_PACKAGES += \
     fs_config_files
-# AliPay
-PRODUCT_BOOT_JARS += \
-    ifaa_fw
 
 # Audio
 PRODUCT_PACKAGES += \
