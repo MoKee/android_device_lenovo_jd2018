@@ -1,0 +1,10 @@
+[
+  {
+    "repository": "android_packages_resources_devicesettings",
+    "target_path": "packages/resources/devicesettings"
+  },
+  {
+    "repository": "android_vendor_lenovo_jd2018",
+    "target_path": "vendor/lenovo/jd2018"
+  }
+]
