@@ -129,10 +129,10 @@ PRODUCT_BOOT_JARS += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0-impl:32 \
+    android.hardware.audio@5.0-impl:32 \
     android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@4.0-impl:32 \
-    android.hardware.soundtrigger@2.1-impl:32 \
+    android.hardware.audio.effect@5.0-impl:32 \
+    android.hardware.soundtrigger@2.2-impl:32 \
     audio.a2dp.default \
     audio.primary.sdm660 \
     audio.r_submix.default \
@@ -148,7 +148,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_platform_info_intcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_intcodec.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
     $(LOCAL_PATH)/audio/graphite_ipc_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/graphite_ipc_platform_info.xml \
@@ -201,7 +201,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl:64 \
     android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     copybit.sdm660 \
@@ -225,7 +225,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.1-service.clearkey
+    android.hardware.drm@1.2-service.clearkey
 
 # Fingerprint
 PRODUCT_COPY_FILES += \
@@ -269,7 +269,8 @@ PRODUCT_PACKAGES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common
+    ims-ext-common \
+    ims_ext_common.xml
     
 # IPACM
 PRODUCT_PACKAGES += \
@@ -474,6 +475,3 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 
-# Wi-Fi Display
-PRODUCT_BOOT_JARS += \
-    WfdCommon
