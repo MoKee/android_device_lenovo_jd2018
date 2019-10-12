@@ -53,7 +53,8 @@ PRODUCT_PACKAGES_DEBUG += \
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl.recovery \
-    bootctrl.sdm660.recovery
+    bootctrl.sdm660.recovery \
+    libgptutils.jd2018.recovery
 
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
