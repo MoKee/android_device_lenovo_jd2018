@@ -36,6 +36,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
+#include <inttypes.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <scsi/ufs/ioctl.h>
@@ -45,12 +46,11 @@
 #include <limits.h>
 #include <dirent.h>
 #include <linux/kernel.h>
-#include <asm/byteorder.h>
 #include <map>
 #include <vector>
 #include <string>
 #define LOG_TAG "gpt-utils"
-#include <cutils/log.h>
+#include <log/log.h>
 #include <cutils/properties.h>
 #include "gpt-utils.h"
 #include <endian.h>
@@ -146,7 +146,7 @@ static int blk_rw(int fd, int rw, int64_t offset, uint8_t *buf, unsigned len)
     int r;
 
     if (lseek64(fd, offset, SEEK_SET) < 0) {
-        fprintf(stderr, "block dev lseek64 %lld failed: %s\n", offset,
+        fprintf(stderr, "block dev lseek64 %" PRId64 " failed: %s\n", offset,
                 strerror(errno));
         return -1;
     }
@@ -192,7 +192,7 @@ static uint8_t *gpt_pentry_seek(const char *ptn_name,
 
     for (pentry_name = (char *) (pentries_start + PARTITION_NAME_OFFSET);
          pentry_name < (char *) pentries_end; pentry_name += pentry_size) {
-        char name8[MAX_GPT_NAME_SIZE];
+        char name8[MAX_GPT_NAME_SIZE] = {0}; // initialize with null
         unsigned i;
 
         /* Partition names in GPT are UTF-16 - ignoring UTF-16 2nd byte */
@@ -746,7 +746,6 @@ int prepare_partitions(enum boot_update_stage stage, const char *dev_path)
     enum gpt_state gpt_prim, gpt_second;
     enum boot_update_stage internal_stage;
     struct stat xbl_partition_stat;
-    struct stat ufs_dir_stat;
 
     if (!dev_path) {
         fprintf(stderr, "%s: Invalid dev_path\n",
@@ -969,7 +968,6 @@ int add_lun_to_update_list(char *lun_path, struct update_data *dat)
 
 int prepare_boot_update(enum boot_update_stage stage)
 {
-        int r, fd;
         int is_ufs = gpt_utils_is_ufs_device();
         struct stat ufs_dir_stat;
         struct update_data data;
@@ -1385,7 +1383,7 @@ int gpt_disk_get_disk_info(const char *dev, struct gpt_disk *dsk)
         }
         gpt_header_size = GET_4_BYTES(disk->hdr + HEADER_SIZE_OFFSET);
         disk->hdr_crc = crc32(0, disk->hdr, gpt_header_size);
-        disk->hdr_bak = gpt_get_header(dev, PRIMARY_GPT);
+        disk->hdr_bak = gpt_get_header(dev, SECONDARY_GPT);
         if (!disk->hdr_bak) {
                 ALOGE("%s: Failed to get backup header", __func__);
                 goto error;
@@ -1521,6 +1519,18 @@ int gpt_disk_commit(struct gpt_disk *disk)
         //Write back the primary partition array
         if (gpt_set_pentry_arr(disk->hdr, fd, disk->pentry_arr)) {
                 ALOGE("%s: Failed to write primary GPT partition arr",
+                                __func__);
+                goto error;
+        }
+        //Write back the secondary header
+        if(gpt_set_header(disk->hdr_bak, fd, SECONDARY_GPT) != 0) {
+                ALOGE("%s: Failed to update secondary GPT header",
+                                __func__);
+                goto error;
+        }
+        //Write back the secondary partition array
+        if (gpt_set_pentry_arr(disk->hdr_bak, fd, disk->pentry_arr_bak)) {
+                ALOGE("%s: Failed to write secondary GPT partition arr",
                                 __func__);
                 goto error;
         }

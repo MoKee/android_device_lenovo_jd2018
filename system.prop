@@ -194,6 +194,10 @@ vendor.camera.aux.packagelist=org.codeaurora.snapcam
 #disable UBWC for camera
 persist.vendor.camera.preview.ubwc=0
 
+# add for exif info
+persist.vendor.camera.manufacturer=Lenovo
+persist.vendor.camera.model=Lenovo Z5
+
 #set maximum supported adapter voltage
 persist.chg.max_volt_mv=9000
 
@@ -245,3 +249,6 @@ ro.mk.maintainer=art_chen
 # HAL 3
 persist.vendor.camera.HAL3.enabled=1
 persist.vendor.camera.eis.enable=1
+#use camera2 api
+persist.sys.camera.camera2=true
+

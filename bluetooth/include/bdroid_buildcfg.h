@@ -23,7 +23,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#undef PROPERTY_VALUE_MAX
 
 #define BTM_DEF_LOCAL_NAME "Lenovo Z5"
 #define BLUETOOTH_QTI_SW TRUE

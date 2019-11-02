@@ -44,10 +44,6 @@ case "$baseband" in
     start vendor.ipacm
 esac
 
-case "$baseband" in
-    "sa8")
-    start vendor.ipacm
-esac
 
 case "$baseband" in
     "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3")
