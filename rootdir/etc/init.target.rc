@@ -98,6 +98,7 @@ on boot
 
 #Load WLAN driver
    insmod /vendor/lib/modules/qca_cld3_wlan.ko
+   chown wifi wifi /sys/module/wlan/parameters/fwpath
 
 #USB controller configuration
     setprop vendor.usb.rndis.func.name "rndis_bam"
@@ -466,4 +467,3 @@ service smcinvoked /system/bin/smcinvoked
    class main
    user system
    group system
-
