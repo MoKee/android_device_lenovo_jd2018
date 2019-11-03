@@ -14,9 +14,6 @@
 # limitations under the License.
 #
 
-# Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
-
 # Inherit from jd2018 device
 $(call inherit-product, device/lenovo/jd2018/device.mk)
 
