@@ -156,3 +156,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.enable_boot_charger_mode=1 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1
+
+# FM
+ PRODUCT_PROPERTY_OVERRIDES += \
+     ro.vendor.fm.use_audio_session=true
