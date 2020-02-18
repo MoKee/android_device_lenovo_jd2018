@@ -1,63 +1,92 @@
 package org.ifaa.android.manager;
 
 import android.content.Context;
-import android.os.Build.VERSION;
-import android.os.SystemProperties;
+import android.hardware.fingerprint.FingerprintManager;
+import android.os.Build;
+import android.os.ServiceManager;
+import android.util.Log;
+import org.ifaa.android.manager.IIFAAManagerService.Stub;
+
+import android.annotation.UnsupportedAppUsage;
 
 public abstract class IFAAManager {
-    private static final int IFAA_VERSION_V2 = 2;
-    private static final int IFAA_VERSION_V3 = 3;
-    private static final int IFAA_VERSION_V4 = 4;
+    String TAG = "IFAA_JAR";
 
-    static int sIfaaVer;
-    static boolean sIsFod = SystemProperties.getBoolean("ro.hardware.fp.fod", false);
+    @UnsupportedAppUsage
+    private boolean isFpSupported(Context context) {
+        if (context != null) {
+            FingerprintManager fpManager = (FingerprintManager) context.getSystemService("fingerprint");
+            if (fpManager != null) {
+                return fpManager.isHardwareDetected();
+            }
+        }
+        return false;
+    }
 
-    /**
-     * 返回手机系统上支持的校验方式，目前IFAF协议1.0版本指纹为0x01、虹膜为0x02
-     */
-    public abstract int getSupportBIOTypes(Context context);
+    @UnsupportedAppUsage
+    private boolean isIrisSupported(Context context) {
+        return context != null ? false : false;
+    }
 
-    /**
-     * 启动系统的指纹/虹膜管理应用界面，让用户进行指纹录入。指纹录入是在系统的指纹管理应用中实现的，
-     * 本函数的作用只是将指纹管理应用运行起来，直接进行页面跳转，方便用户录入。
-     * @param context
-     * @param authType 生物特征识别类型，指纹为1，虹膜为2
-     * @return 0，成功启动指纹管理应用；-1，启动指纹管理应用失败。
-     */
-    public abstract int startBIOManager(Context context, int authType);
+    @UnsupportedAppUsage
+    public String getDeviceModel() {
+        if (Build.BRAND.equalsIgnoreCase("motorola")) {
+            return getMotoDeviceModel();
+        }
+        return getLenovoDeviceModel();
+    }
 
-    /**
-     * 通过ifaateeclient的so文件实现REE到TA的通道
-     * @param context
-     * @param param 用于传输到IFAA TA的数据buffer
-     * @return IFAA TA返回给REE数据buffer
-     */
-    public native byte[] processCmd(Context context, byte[] param);
+    @UnsupportedAppUsage
+    private String getLenovoDeviceModel() {
+        return Build.MODEL.replace(' ', '-');
+    }
 
-    /**
-     * 获取设备型号，同一款机型型号需要保持一致
-     */
-    public abstract String getDeviceModel();
+    @UnsupportedAppUsage
+    private String getMotoDeviceModel() {
+        String deviceModel = Build.MODEL.replace('-', '_');
+        String brand = Build.BRAND;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(brand.substring(0, 1).toUpperCase());
+        stringBuilder.append(brand.substring(1));
+        brand = stringBuilder.toString();
+        stringBuilder = new StringBuilder();
+        stringBuilder.append(brand);
+        stringBuilder.append("-");
+        stringBuilder.append(deviceModel);
+        return stringBuilder.toString();
+    }
 
-    /**
-     * 获取IFAAManager接口定义版本，目前为1
-     */
-    public abstract int getVersion();
+    @UnsupportedAppUsage
+    public int getVersion() {
+        return 1;
+    }
 
-    /**
-     * load so to communicate from REE to TEE
-     */
-    static {
-        sIfaaVer = 1;
+    @UnsupportedAppUsage
+    public int getSupportBIOTypes(Context context) {
+        int types = 0;
+        if (isFpSupported(context)) {
+            types = 0 | 1;
+        }
+        if (isIrisSupported(context)) {
+            return types | 2;
+        }
+        return types;
+    }
 
-        if (VERSION.SDK_INT >= 28) {
-            sIfaaVer = IFAA_VERSION_V4;
-        } else if (sIsFod) {
-            sIfaaVer = IFAA_VERSION_V3;
-        } else if (VERSION.SDK_INT >= 24) {
-            sIfaaVer = IFAA_VERSION_V2;
-        } else {
-            System.loadLibrary("teeclientjni"); //teeclientjni for TA test binary //ifaateeclient
+    @UnsupportedAppUsage
+    public int startBIOManager(Context context, int authType) {
+        return -1;
+    }
+
+    @UnsupportedAppUsage
+    public byte[] processCmd(Context context, byte[] param) {
+        try {
+          IFAAChenUtils mIFAAChenUtils = new IFAAChenUtils();
+          return mIFAAChenUtils.processCmd(param);
+        } catch (Exception e) {
+            Log.e(this.TAG, "FAILED to call mIFAAChenUtils.processCmd");
+            e.printStackTrace();
+            return null;
         }
     }
 }
