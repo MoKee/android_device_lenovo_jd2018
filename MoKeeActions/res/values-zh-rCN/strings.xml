@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screen_gestures_panel_summary" translatable="false">设备特色手势</string>
+    <string name="moto_gestures_panel_title">联想手势</string>
+</resources>

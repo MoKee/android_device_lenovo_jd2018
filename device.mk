@@ -210,7 +210,7 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    XiaomiDoze
+    MoKeeActions
 
 # DRM
 PRODUCT_PACKAGES += \
