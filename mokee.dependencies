@@ -6,5 +6,9 @@
   {
     "repository": "android_vendor_lenovo_jd2018",
     "target_path": "vendor/lenovo/jd2018"
+  },
+  {
+    "repository": "android_kernel_xiaomi_whyred",
+    "target_path": "kernel/lenovo/jd2018"
   }
 ]
