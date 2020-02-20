@@ -244,11 +244,10 @@ vendor.vidc.debug.perf.mode=2
 persist.rcs.supported=0
 
 # Maintainer
-ro.mk.maintainer=art_chen
+ro.mk.maintainer=chenxy
 
 # HAL 3
 persist.vendor.camera.HAL3.enabled=1
 persist.vendor.camera.eis.enable=1
 #use camera2 api
 persist.sys.camera.camera2=true
-
