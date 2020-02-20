@@ -13,7 +13,7 @@ on init
 
 # hwdiag test interface on thirdparty Huaqin
 service hwdiag /system/bin/hwdiag
-    class main
+  class main
 	user root
 	group root
 
@@ -62,13 +62,10 @@ on boot
     mkdir /data/system/users/0/fpdata
     chown system system /data/system/users/0/fpdata
     chmod 0777 /data/system/users/0/fpdata
-    # Add for egtzappf end 
+    # Add for egtzappf end
 
 
 # Huaqin modify for factory_reset in shipping image by zhouyingchen at 20180417 for bsp/rom start
 on property:sys.ab_update.factory_reset=true
-    write_factory_reset
 	setprop sys.diag.reset_factory ${sys.ab_update.factory_reset}
 # Huaqin modify for factory_reset in shipping image by zhouyingchen at 20180417 for bsp/rom end
-
-
