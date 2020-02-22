@@ -158,5 +158,77 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.dbg.vt_avail_ovr=1
 
 # FM
- PRODUCT_PROPERTY_OVERRIDES += \
-     ro.vendor.fm.use_audio_session=true
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.vendor.fm.use_audio_session=true
+
+#enable headset calibration
+PRODUCT_PROPERTY_OVERRIDES += \
+	 vendor.audio.volume.headset.gain.depcal=true
+
+#add dynamic feature flags here
+PRODUCT_PROPERTY_OVERRIDES += \
+	 vendor.audio.feature.afe_proxy.enable=true \
+	 vendor.audio.feature.anc_headset.enable=true \
+	 vendor.audio.feature.battery_listener.enable=false \
+	 vendor.audio.feature.compr_cap.enable=false \
+	 vendor.audio.feature.compress_in.enable=false \
+	 vendor.audio.feature.compress_meta_data.enable=true \
+	 vendor.audio.feature.compr_voip.enable=true \
+	 vendor.audio.feature.concurrent_capture.enable=false \
+	 vendor.audio.feature.custom_stereo.enable=true \
+	 vendor.audio.feature.display_port.enable=true \
+	 vendor.audio.feature.dsm_feedback.enable=false \
+	 vendor.audio.feature.dynamic_ecns.enable=false \
+	 vendor.audio.feature.ext_hw_plugin.enable=false \
+	 vendor.audio.feature.external_dsp.enable=false \
+	 vendor.audio.feature.external_speaker.enable=false \
+	 vendor.audio.feature.external_speaker_tfa.enable=false \
+	 vendor.audio.feature.fluence.enable=true \
+	 vendor.audio.feature.fm.enable=true \
+	 vendor.audio.feature.hdmi_edid.enable=true \
+	 vendor.audio.feature.hdmi_passthrough.enable=true \
+	 vendor.audio.feature.hfp.enable=true \
+	 vendor.audio.feature.hifi_audio.enable=true \
+	 vendor.audio.feature.hwdep_cal.enable=false \
+	 vendor.audio.feature.incall_music.enable=false \
+	 vendor.audio.feature.multi_voice_session.enable=true \
+	 vendor.audio.feature.keep_alive.enable=false \
+	 vendor.audio.feature.kpi_optimize.enable=true \
+	 vendor.audio.feature.maxx_audio.enable=false \
+	 vendor.audio.feature.ras.enable=true \
+	 vendor.audio.feature.record_play_concurency.enable=false \
+	 vendor.audio.feature.src_trkn.enable=true \
+	 vendor.audio.feature.spkr_prot.enable=true \
+	 vendor.audio.feature.ssrec.enable=true \
+	 vendor.audio.feature.usb_offload.enable=true \
+	 vendor.audio.feature.usb_offload_burst_mode.enable=false \
+	 vendor.audio.feature.usb_offload_sidetone_volume.enable=false \
+	 vendor.audio.feature.deepbuffer_as_primary.enable=false \
+	 vendor.audio.feature.vbat.enable=true \
+	 vendor.audio.feature.wsa.enable=false \
+	 vendor.audio.feature.audiozoom.enable=false \
+	 vendor.audio.feature.snd_mon.enable=true
+
+#enable dualmic fluence for voice communication
+PRODUCT_PROPERTY_OVERRIDES += \
+	 persist.audio.fluence.voicecomm=true
+
+#enable AAC frame ctl for A2DP sinks
+PRODUCT_PROPERTY_OVERRIDES += \
+	 persist.vendor.bt.aac_frm_ctl.enabled=true
+
+#Set speaker protection cal tx path sampling rate to 48k
+PRODUCT_PROPERTY_OVERRIDES += \
+	 vendor.audio.spkr_prot.tx.sampling_rate=48000
+
+#Set AudioFlinger client heap size
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.af.client_heap_size_kbyte=7168
+
+PRODUCT_PROPERTY_OVERRIDES += \
+   vendor.audio_hal.in_period_size=144 \
+   vendor.audio_hal.period_multiplier=3 \
+   vendor.audio.adm.buffering.ms=2
+
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.vendor.audio.hw.binder.size_kbyte=1024
