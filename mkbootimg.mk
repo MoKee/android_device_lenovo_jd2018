@@ -15,7 +15,9 @@ $(INSTALLED_RECOVERY_RAMDISK_TARGET): $(BOARD_PREBUILT_RECOVERY_RAMDISK)
 	cp $(BOARD_PREBUILT_RECOVERY_RAMDISK) $@
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_FILES) $(RECOVERYIMAGE_EXTRA_DEPS)
-	$(call pretty,"Target boot image from recovery: $@")
+	$(call pretty,"Building Recovery Ramdisk for packing target file zip")
+	$(call build-recoveryramdisk)
+	$(call pretty,"Target boot image from prebuilt-recovery: $@")
 	$(hide) $(MKBOOTIMG) \
 		$(INTERNAL_RECOVERYIMAGE_ARGS) \
 		$(INTERNAL_MKBOOTIMG_VERSION_ARGS) \
